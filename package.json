@@ -1,0 +1,14 @@
+{
+  "name": "everyday-mart",
+  "version": "1.0.0",
+  "description": "Online Grocery App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maria 5",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
