@@ -12,6 +12,8 @@ export default function RegisterScreen() {
   const submitHandler = (e) => {
     e.preventDefault()
   }
+
+  
   return (
     <FormContainer>
       <h1>Sign up</h1>
