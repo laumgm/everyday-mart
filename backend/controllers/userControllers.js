@@ -1,6 +1,8 @@
 import asyncHandler from 'express-async-handler';
+import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
 
+//
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   
@@ -29,6 +31,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+// Authenticate User
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -41,12 +44,17 @@ const loginUser = asyncHandler(async (req, res) => {
         _id: user._id,
         email: user.email,
         isAdmin: user.isAdmin,
+        token: generateToken(user._id),
       })
     } else {
-      res.status(201).send('Invalid Credentials');
+      // res.status(201).send('Invalid Credentials');
+      res.status(201);
+      throw new Error('Invalid Credentials');
     }
   } else {
-    res.status(404).send('User does not Exist');
+    // res.status(404).send('User does not Exist');
+    res.status(404);
+    throw new Error('User does not Exist');
   }
 })
 export {
