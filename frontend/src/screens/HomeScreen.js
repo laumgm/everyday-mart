@@ -8,10 +8,12 @@ function HomeScreen() {
     <>
       <Row>
         {products.map((product) => (
-          <Col sm={12} md={6} lg={4} xl={3}>
-            {/* components can take in props */}
-            <Product product={product} />
-          </Col>
+          
+            <Col sm={12} md={6} lg={4} xl={3} key={product._id}>
+                {/* components can take in props */}
+                <Product product={product} />
+            </Col>
+          
         ))}
       </Row>
     </>
