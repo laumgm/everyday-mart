@@ -3,11 +3,13 @@ import mongoose from 'mongoose';
 import products from './products.js';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import errorHandler from './errorMiddleware.js';
 import userRoutes from './routes/userRoutes.js';
+
 dotenv.config();
 const app = express();
 
-//db connection
+// DB connection
 try {
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
         useUnifiedTopology: true,
@@ -24,9 +26,9 @@ try {
 }
 
 app.use(cors());
-// accept json data in the body
-app.use(express.json());
+app.use(express.json());                // accept json data in the body
 app.use('/api/user', userRoutes);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000
 app.listen(

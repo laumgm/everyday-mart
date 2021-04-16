@@ -30,7 +30,8 @@ const registerUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     })
   } else {
-    res.status(400).send('Invalid User Data');
+    res.status(400)
+    throw new Error('Invalid User Data');
   }
 });
 
@@ -45,18 +46,21 @@ const loginUser = asyncHandler(async (req, res) => {
     if (await user.matchPassword(password)) {
       res.json({
         _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
       })
 
     } else {
-      res.status(401)
-      throw new Error('Invalid Credentials')
+      res.status(404)
+      throw new Error('Invalid Credentials');
+
     }
   } else {
     res.status(404)
-    throw new Error('User does not Exist')
+    throw new Error('User does not exist');
   }
 })
 export {
