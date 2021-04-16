@@ -9,6 +9,7 @@ export default function Header(){
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
+  
   const signoutHandler = () => {
     dispatch(signout());
   };
@@ -30,7 +31,7 @@ export default function Header(){
               </LinkContainer>
 
               {userInfo ? (
-                <NavDropdown title={userInfo.email} id='username'>
+                <NavDropdown title={userInfo.firstName} id='username'>
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>

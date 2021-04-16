@@ -29,50 +29,52 @@ export default function LoginScreen( { location, history }) {
       dispatch(signin(email, password)) 
   }
   return (
-    <FormContainer>
-      <h1>Sign in</h1>
-      { error && <Message variant='danger'> {error} </Message> }
-      { loading && <Loader /> }
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId='email'>
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control 
-            type='email' 
-            placeholder='Enter email'
-            name='email'
-            onChange={(e) => setEmail(e.target.value)}>
-          </Form.Control>
-        </Form.Group>
+    <div className='mt-5'>
+      <FormContainer>
+        <h1>Sign in</h1>
+        { error && <Message variant='danger'> {error} </Message> }
+        { loading && <Loader /> }
+        <Form onSubmit={submitHandler}>
+          <Form.Group controlId='email'>
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control 
+              type='email' 
+              placeholder='Enter email'
+              name='email'
+              onChange={(e) => setEmail(e.target.value)}>
+            </Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control 
-            type='password' 
-            placeholder='Enter password'
-            name='password'
-            onChange={(e) => setPassword(e.target.value)}>
-          </Form.Control>
-        </Form.Group>
-        {/* <Link to={redirect ? `/?redirect=${redirect}` : '/'}>
-          <Button 
+          <Form.Group controlId='password'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+              type='password' 
+              placeholder='Enter password'
+              name='password'
+              onChange={(e) => setPassword(e.target.value)}>
+            </Form.Control>
+          </Form.Group>
+          {/* <Link to={redirect ? `/?redirect=${redirect}` : '/'}>
+            <Button 
             type='submit' 
             variant='primary' 
             onClick={Success}
-          >
+            >
             Sign in
-          </Button>
-        </Link> */}
-        <Button type='submit' variant='primary'>Sign in</Button>
-      </Form>
+            </Button>
+          </Link> */}
+          <Button type='submit' variant='primary'>Sign in</Button>
+        </Form>
 
-      <Row className='py-3'>
-        <Col>
-          New Customer? {' '}
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
-              Create an account
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
+        <Row className='py-3'>
+          <Col>
+            New Customer? {' '}
+            <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+                Create an account
+            </Link>
+          </Col>
+        </Row>
+      </FormContainer>
+    </div>
   )
 }

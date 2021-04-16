@@ -8,8 +8,8 @@ import Loader from '../components/LoadingBox.js';
 import { register } from '../actions/userActions.js';
 
 export default function RegisterScreen({ location, history }) {
-  const [firstName, setFirstname] = useState('');
-  const [lastName, setLastname] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -38,73 +38,75 @@ export default function RegisterScreen({ location, history }) {
   }
 
   return (
-    <FormContainer>
-      <h1>Sign up</h1>
-      { message && <Message variant='danger'> {message} </Message> }
-      { error && <Message variant='danger'> {error} </Message> }
-      { loading && <Loader /> }
-      <Form>
-        <Form.Group controlId='firstName'>
-          <Form.Label>First Name</Form.Label>
-          <Form.Control 
-            type='text' 
-            placeholder='Enter first name' 
-            value={firstName}
-            onChange={(e) => setFirstname(e.target.value)}>
-          </Form.Control>
-        </Form.Group>
+    <div className='mt-5'>
+      <FormContainer>
+        <h1>Sign up</h1>
+        { message && <Message variant='danger'> {message} </Message> }
+        { error && <Message variant='danger'> {error} </Message> }
+        { loading && <Loader /> }
+        <Form>
+          <Form.Group controlId='firstName'>
+            <Form.Label>First Name</Form.Label>
+            <Form.Control 
+              type='text' 
+              placeholder='Enter first name' 
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}>
+            </Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='lastName'>
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control 
-            type='text' 
-            placeholder='Enter last name' 
-            value={lastName}
-            onChange={(e) => setLastname(e.target.value)}>
-          </Form.Control>
-        </Form.Group>
+          <Form.Group controlId='lastName'>
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control 
+              type='text' 
+              placeholder='Enter last name' 
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}>
+            </Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='email'>
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control 
-            type='email' 
-            placeholder='Enter email' 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}>
-          </Form.Control>
-        </Form.Group>
+          <Form.Group controlId='email'>
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control 
+              type='email' 
+              placeholder='Enter email' 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}>
+            </Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control 
-            type='password' 
-            placeholder='Enter password' 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}>
-          </Form.Control>
-        </Form.Group>
+          <Form.Group controlId='password'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+              type='password' 
+              placeholder='Enter password' 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}>
+            </Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='confirmPassword'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control 
-            type='password' 
-            placeholder='Confirm password' 
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}>
-          </Form.Control>
-        </Form.Group>
+          <Form.Group controlId='confirmPassword'>
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control 
+              type='password' 
+              placeholder='Confirm password' 
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}>
+            </Form.Control>
+          </Form.Group>
 
-        <Button type='submit' variant='primary' onClick={submitHandler}>Sign Up</Button>
-      </Form>
+          <Button type='submit' variant='primary' onClick={submitHandler}>Sign Up</Button>
+        </Form>
 
-      <Row className='py-3'>
-        <Col>
-          Have an account? {' '}
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-              Login
-          </Link>
-        </Col>
-      </Row>
-    </FormContainer>
+        <Row className='py-3'>
+          <Col>
+            Have an account? {' '}
+            <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+                Login
+            </Link>
+          </Col>
+        </Row>
+      </FormContainer>
+    </div>
   )
 }
