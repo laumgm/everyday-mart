@@ -33,9 +33,9 @@ export default function Header(){
               {userInfo ? (
                 <NavDropdown title={userInfo.firstName} id='username'>
                   <LinkContainer to="/profile">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                    <NavDropdown.Item className='dropdown-item'>Profile</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={signoutHandler}>
+                  <NavDropdown.Item className='dropdown-item' onClick={signoutHandler}>
                     Sign out
                   </NavDropdown.Item>
                 </NavDropdown>
