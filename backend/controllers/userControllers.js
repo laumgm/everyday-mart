@@ -2,8 +2,9 @@ import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
 
-// Register a user
-// PATH /api/user/register
+// @desc    Register a user
+// @route   GET /api/user/register
+// @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
   
@@ -35,14 +36,14 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// Authenticate User
-// PATH /api/user/login
+// @desc    Login User
+// @route   POST /api/user/login
+// @access  Public
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   //validate email and password first
   if (user) {
-    //check if password matched
     if (await user.matchPassword(password)) {
       res.json({
         _id: user._id,
@@ -63,10 +64,41 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new Error('User does not exist');
   }
 })
+
+// @desc    Get user profile
+// @route   GET /api/users/profile
+// @access  Private
+const getUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id)
+
+  if(user) {
+    res.json({
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    })
+  } else {
+    res.status(404);
+    throw new Error('User not Found');
+  }
+})
+
+// @desc    Get all users
+// @route   GET /api/users
+// @access  Private/Admin
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({})
+    .select('-password')
+  res.json(users)
+})
+
 export {
   registerUser,
   loginUser,
-  
+  getUserProfile,
+  getUsers,
 }
 
 
